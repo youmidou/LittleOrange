@@ -240,6 +240,8 @@ def interactive_mode():
 
 def main():
     """主函数 - 运行所有示例"""
+    import sys
+
     print("\n")
     print("╔════════════════════════════════════════════════════════════╗")
     print("║                    LittleOrange                            ║")
@@ -247,17 +249,36 @@ def main():
     print("╚════════════════════════════════════════════════════════════╝")
     print()
 
+    # 检查命令行参数
+    if len(sys.argv) > 1:
+        if sys.argv[1] == "--interactive" or sys.argv[1] == "-i":
+            interactive_mode()
+            return
+        elif sys.argv[1] == "--help" or sys.argv[1] == "-h":
+            print("使用方法:")
+            print("  python main.py              # 运行示例")
+            print("  python main.py -i           # 直接进入交互模式")
+            print("  python main.py --interactive # 直接进入交互模式")
+            print("  python main.py --help       # 显示帮助")
+            return
+
     # 运行示例
     example_calculator()
     example_file_operations()
     example_datetime()
     example_custom_skill()
 
-    # 进入交互模式
-    print("\n是否进入交互模式？(y/n): ", end="")
-    choice = input().strip().lower()
-    if choice == 'y':
-        interactive_mode()
+    # 进入交互模式（仅在交互式终端中）
+    if sys.stdin.isatty():
+        print("\n是否进入交互模式？(y/n): ", end="")
+        try:
+            choice = input().strip().lower()
+            if choice == 'y':
+                interactive_mode()
+        except (EOFError, KeyboardInterrupt):
+            print("\n\n程序结束")
+    else:
+        print("\n提示: 使用 'python main.py -i' 进入交互模式")
 
 
 if __name__ == '__main__':
