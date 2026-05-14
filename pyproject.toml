@@ -1,0 +1,42 @@
+[project]
+name = "little-orange"
+version = "0.1.0"
+description = "一个模块化、可扩展的大模型 Agent 和 Skills 系统"
+authors = [
+    {name = "LittleOrange Team", email = "team@littleorange.ai"}
+]
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+
+dependencies = [
+    "anthropic>=0.18.0",
+    "openai>=1.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "black>=23.0.0",
+    "flake8>=6.0.0",
+    "mypy>=1.0.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/yourusername/LittleOrange"
+Documentation = "https://github.com/yourusername/LittleOrange/docs"
+Repository = "https://github.com/yourusername/LittleOrange"
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_backend"
+
+[tool.black]
+line-length = 88
+target-version = ['py38']
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false
